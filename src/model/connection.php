@@ -30,6 +30,10 @@
         return $this->mysqli;
     }	
 
+    public function closeConection(){
+        return $this->close();
+    }	
+
 
 	}
 

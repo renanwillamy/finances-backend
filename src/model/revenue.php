@@ -1,11 +1,20 @@
 <?php 
 
 class Revenue { 
+    private $id;
     private $name;
     private $amount;
     private $dueDate;
     private $receivedDate;
     private $information;
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
 
     public function getName(){
         return $this->name;
@@ -35,7 +44,7 @@ class Revenue {
         return $this->receivedDate;
     }
 
-    public function seReceivedDate($receivedDate){
+    public function setReceivedDate($receivedDate){
         $this->receivedDate = $receivedDate;
     }
 
@@ -52,5 +61,3 @@ class Revenue {
 	}
 
 } 
-
-?>
