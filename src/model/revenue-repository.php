@@ -35,6 +35,23 @@ class RevenueRepository
         return $responseDTO->jsonSerialize();
     }
 
+    function getRevenueById ($id){
+        $responseDTO = new ResponseDTO();
+        $result = $this->mysqli->query("select * from revenue WHERE id = '$id'");
+        $revenue = null;
+        while ($obj = $result->fetch_object()) {
+            $revenue = new Revenue();
+            $revenue->setId($obj->id);
+            $revenue->setName($obj->name);
+            $revenue->setAmount($obj->amount);
+            $revenue->setDueDate($obj->due_date);
+            $revenue->setReceivedDate($obj->received_date);
+            $revenue->setInformation($obj->information);
+        }
+        $responseDTO->setData($revenue->jsonSerialize());
+        return $responseDTO->jsonSerialize();
+    }
+
     function createRevenue($revenue)
     {
         $responseDTO = new ResponseDTO();

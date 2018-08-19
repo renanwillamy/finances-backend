@@ -18,6 +18,15 @@ $app->get('/revenues', function (Request $request, Response $response, array $ar
     
 });
 
+
+$app->get('/revenues/{id}', function (Request $request, Response $response, array $args) {
+
+    $repository = new RevenueRepository();
+    $revenue = $repository->getRevenueById($args['id']);
+    echo json_encode($revenue);
+
+});
+
 $app->post('/revenue', function (Request $request, Response $response, array $args) {
     $repository = new RevenueRepository();
     $revenue = new Revenue();
