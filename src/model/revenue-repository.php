@@ -35,7 +35,8 @@ class RevenueRepository
         return $responseDTO->jsonSerialize();
     }
 
-    function getRevenueById ($id){
+    function getRevenueById($id)
+    {
         $responseDTO = new ResponseDTO();
         $result = $this->mysqli->query("select * from revenue WHERE id = '$id'");
         $revenue = null;
@@ -48,7 +49,10 @@ class RevenueRepository
             $revenue->setReceivedDate($obj->received_date);
             $revenue->setInformation($obj->information);
         }
-        $responseDTO->setData($revenue->jsonSerialize());
+
+        if ($revenue) {
+            $responseDTO->setData($revenue->jsonSerialize());
+        }
         return $responseDTO->jsonSerialize();
     }
 
@@ -91,7 +95,8 @@ class RevenueRepository
         return $responseDTO->jsonSerialize();
     }
 
-    function deleteRevenue($revenue){
+    function deleteRevenue($revenue)
+    {
         $responseDTO = new ResponseDTO();
         $sql = "DELETE FROM revenue WHERE id = {$revenue->getId()}";
         if ($this->mysqli->query($sql)) {
@@ -100,7 +105,7 @@ class RevenueRepository
             } else {
                 $responseDTO->setMessage("Noting changed");
             }
-        }else {
+        } else {
             $responseDTO->setError("Error: " . $this->mysqli->error);
         }
         $this->mysqli->close();
